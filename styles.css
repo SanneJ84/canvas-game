@@ -26,10 +26,10 @@ header {
     display: flex; 
 }
 
-#canvas1 {
-    border: 1px solid rgb(255, 255, 255);
-    background-color:white;
-}
+//#canvas1 {
+//    border: 1px solid rgb(255, 255, 255);
+//    background-color:white;
+//}
 
 .sidebar {
     display: flex;
