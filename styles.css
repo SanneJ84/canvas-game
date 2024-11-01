@@ -8,8 +8,6 @@ body {
 
 header {
     display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #000000;
     color: #c76f1c;
     font-size: 10px;
@@ -49,8 +47,8 @@ header {
 
 h1 {
     font-family: 'orbitron', sans-serif;
-    text-align: center;
     font-size: 50px;
+    margin-left: 700px;
 }
 
 p {
