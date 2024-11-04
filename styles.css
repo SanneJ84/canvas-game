@@ -13,7 +13,7 @@ header {
     font-size: 10px;
     padding: 20px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .main {
@@ -39,7 +39,7 @@ header {
 #controls, #score, #restartButton {
     margin-bottom: 10px; 
     background-color: #000000;
-    color: #c76f1c; 
+    color: #a41ace; 
     padding: 10px; 
     border: 1px solid #ccc;
     font-size: 20px;
