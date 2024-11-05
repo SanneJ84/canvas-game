@@ -9,7 +9,7 @@ const ctx = canvas.getContext('2d');
 var scores = 0
 var lives = 3
 var killed = 0
-var seconds = 2
+var ammo = 0
 
 canvas.width = 850;
 canvas.height = 600;
@@ -33,6 +33,49 @@ class Player {
     this.position = {
       x: canvas.width / 2 - this.width / 2,
       y: canvas.height - this.height - 5
+    }
+  }
+}
+
+draw() {
+  ctx.save()
+  ctx.globalAlpha = this.opacity
+  ctx.drawImage(
+  this.image,
+  this.position.x,
+  this.position.y,
+  this.width,
+  this.height
+  )
+  ctx.restore()
+}
+  update() {
+    if (this.image) {
+    this.draw()
+    this.position.x += this.velocity.x
+    }
+  }
+}
+
+class Aim {
+  constructor() {
+    
+    this.velocity = {
+      x: 0,
+      y: 0
+    }
+    this.opacity = 1   
+
+    const image = new Image()
+    image.src = "aim.png";
+    image.onload = () => {
+    const scale = 0.80
+    this.image = image
+    this.width = image.width * scale
+    this.height = image.height * scale
+    this.position = {
+      x: canvas.width / 2 - this.width / 2 - 2,
+      y: canvas.height - this.height - 285
     }
   }
 }
@@ -220,6 +263,7 @@ class Particle {
 }
 
 const player = new Player()
+const aimAssist = new Aim()
 const projectiles = []
 const grids = []
 const invaderProjectiles = []
@@ -247,8 +291,13 @@ let died = false
 let stopGame = false
 
 function statsOut() {
+  var calc = (killed / ammo) * 100
+  var result = calc.toFixed(2)
+
   document.getElementById('counted').innerHTML = "Score: " + scores;
   document.getElementById('shooted').innerHTML = "Kills: " + killed;
+  document.getElementById('ammoUsed').innerHTML = "Shots: " + ammo;
+  document.getElementById('acc').innerHTML = "Accuracy: " + result + "%";
 }
 
 function gameReset() {
@@ -328,6 +377,7 @@ function animate() {
   //ctx.fillRect(0, 0, canvas.width, canvas.height)
   
   player.update()
+  aimAssist.update()
 
   particles.forEach((particle, index) => {
     if (particle.position.y - particle.radius >= canvas.height) {
@@ -361,7 +411,7 @@ function animate() {
 
         setTimeout(() => {
          invaderProjectiles.splice(index, 1)
-         lives = lives -1
+         lives -= 1
 	 player.opacity = 0
          died = true
          gameReset()
@@ -421,8 +471,8 @@ function animate() {
 	     )
 
              if (invaderFound && projectileFound) {
-                scores = scores + 5
-                killed = killed + 1
+                scores +=  5
+                killed +=  1
                 statsOut()
 		createParticles({
 		  object: invader,
@@ -451,11 +501,14 @@ function animate() {
 
   if (keys.a.pressed && player.position.x >= 0) {
      player.velocity.x = -5
+     aimAssist.velocity.x = -5
   } 
   else if (keys.d.pressed && player.position.x + player.width <= canvas.width) {
     player.velocity.x = 5
+    aimAssist.velocity.x = 5
   } else {
     player.velocity.x = 0
+    aimAssist.velocity.x = 0
   }
   if (frames % randomInterval === 0) {
      grids.push(new Grid())
@@ -480,6 +533,8 @@ document.addEventListener('keydown', ({key}) => {
    
     case 'g':
     keys.g.pressed = true
+    ammo += 1
+    statsOut()
     projectiles.push(
       new Projectile({
         position: {
