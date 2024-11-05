@@ -26,7 +26,7 @@ class Player {
     const image = new Image()
     image.src = "newShip2.png";
     image.onload = () => {
-    const scale = 0.50
+    const scale = 0.3
     this.image = image
     this.width = image.width * scale
     this.height = image.height * scale
@@ -214,7 +214,7 @@ class Grid {
     }
     this.invaders = []
     const columns = Math.floor(Math.random() * 8 + 4)
-    const rows = Math.floor(Math.random() * 7 + 2)
+    const rows = Math.floor(Math.random() * 7 + 1)
     
     this.width = columns * 50
 
@@ -325,6 +325,7 @@ function stopFuncs() {
 
 function respawn() {
   player.opacity = 1
+  aimAssist.opacity = 1
   died = false
 }
 
@@ -413,6 +414,7 @@ function animate() {
          invaderProjectiles.splice(index, 1)
          lives -= 1
 	 player.opacity = 0
+         aimAssist.opacity = 0
          died = true
          gameReset()
        }, 0)
@@ -422,7 +424,7 @@ function animate() {
        }, 2000)
 
         createParticles({
-          object: player,
+          object: player, aimAssist,
           color: 'lightblue',
           fades: true
 	})
@@ -538,12 +540,12 @@ document.addEventListener('keydown', ({key}) => {
     projectiles.push(
       new Projectile({
         position: {
-          x: player.position.x + 48,
+          x: player.position.x + 29,
           y: player.position.y
         },
         velocity: {
           x: 0,
-          y: -8
+          y: -12
         }
      })
     )
@@ -557,11 +559,11 @@ document.addEventListener('keydown', ({key}) => {
       new Projectile({
         position: {
           x: player.position.x + 29,
-          y: player.position.y
+          y: player.position.y - 25
         },
         velocity: {
           x: 0,
-          y: -12
+          y: -17
         },
         color: 'red',
         isLaser: true
