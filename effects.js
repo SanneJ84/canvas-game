@@ -33,9 +33,14 @@ function playExplosionSound() {
 }
 
 const shootSound = new Audio('assets/weapon.mp3');
+const laserSound = new Audio('assets/laser.mp3');
+
 document.addEventListener("keydown", (event) => {
     if (event.key === "g" || event.key === "G") { 
         shootSound.currentTime = 0; 
         shootSound.play(); 
+    } else if (event.key === "h" || event.key === "H") {
+        laserSound.currentTime = 0; 
+        laserSound.play();
     }
 });

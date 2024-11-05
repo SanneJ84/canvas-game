@@ -58,24 +58,34 @@ draw() {
 }
 
 class Projectile {
-  constructor({position, velocity}) {
-    this.position = position
-    this.velocity = velocity
-    this.radius = 3.5
+  constructor({ position, velocity, color = 'cyan', isLaser = false }) {
+      this.position = position;
+      this.velocity = velocity;
+      this.radius = 3.5; 
+      this.color = color;
+      this.isLaser = isLaser;
+      this.length = 30; 
   }
+
   draw() {
-    ctx.beginPath()
-    ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
-    ctx.fillStyle = 'cyan';
-    ctx.fill()
-    ctx.closePath()
+      ctx.fillStyle = this.color;
+      if (this.isLaser) {
+          ctx.fillRect(this.position.x, this.position.y, 2, this.length); // Suorakaide laserille
+      } else {
+          ctx.beginPath();
+          ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.closePath();
+      }
   }
+
   update() {
-    this.draw()
-    this.position.x += this.velocity.x
-    this.position.y += this.velocity.y
+      this.draw();
+      this.position.x += this.velocity.x;
+      this.position.y += this.velocity.y;
   }
 }
+
 
 class InvaderProjectile {
   constructor({position, velocity}) {
@@ -226,6 +236,9 @@ const keys = {
   g: {
     pressed: false
   },
+  h: {
+    pressed: false
+  }
 }
 
 let frames = 0
@@ -480,8 +493,27 @@ document.addEventListener('keydown', ({key}) => {
      })
     )
     break
+
+    case 'h':
+    keys.h.pressed = true
+    projectiles.push(
+      new Projectile({
+        position: {
+          x: player.position.x + 48,
+          y: player.position.y
+        },
+        velocity: {
+          x: 0,
+          y: -8
+        },
+        color: 'red',
+        isLaser: true
+     })
+    );
+    break;
   }
 });
+
 document.addEventListener('keyup', ({key}) => {
   switch (key) {
     case 'a':
@@ -493,6 +525,10 @@ document.addEventListener('keyup', ({key}) => {
    
     case 'g':
     keys.g.pressed = false
+    break
+
+    case 'h':
+    keys.h.pressed = false
     break
   }
 });
