@@ -7,7 +7,7 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
 var scores = 0
-var lives = 3
+var lives = 5
 var killed = 0
 var ammo = 0
 
@@ -554,12 +554,12 @@ document.addEventListener('keydown', ({key}) => {
     projectiles.push(
       new Projectile({
         position: {
-          x: player.position.x + 48,
+          x: player.position.x + 29,
           y: player.position.y
         },
         velocity: {
           x: 0,
-          y: -8
+          y: -12
         },
         color: 'red',
         isLaser: true
