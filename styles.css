@@ -36,13 +36,17 @@ header {
     width: 200px; 
 }
 
-#controls, #score, #restartButton {
+#controls, #score, .buttons {
     margin-bottom: 10px; 
     background-color: #000000;
     color: #a41ace; 
     padding: 10px; 
     border: 1px solid #ccc;
     font-size: 20px;
+}
+.buttons:hover {
+  transition: 0.5s;
+  background-color: lightgreen;
 }
 
 h1 {
