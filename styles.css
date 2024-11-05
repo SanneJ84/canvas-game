@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #000000;
+    background-color: #09093d;
 }
 
 header {
@@ -14,6 +14,7 @@ header {
     padding: 20px;
     width: 100%;
     margin-bottom: 40px;
+    border-bottom: 2px solid #000000;
 }
 
 .main {
@@ -41,7 +42,7 @@ header {
     background-color: #000000;
     color: #a41ace; 
     padding: 10px; 
-    border: 1px solid #ccc;
+    border: 1px solid #464545;
     font-size: 20px;
 }
 .buttons:hover {
@@ -57,7 +58,7 @@ h1 {
 
 p {
     font-family: 'orbitron', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
 }   
 
 img {

@@ -344,6 +344,8 @@ function animate() {
 	invaderProjectile.position.x + invaderProjectile.width >= player.position.x &&
         invaderProjectile.position.x <= player.position.x + player.width) {
         
+          playExplosionSound()
+
         setTimeout(() => {
          invaderProjectiles.splice(index, 1)
          lives = lives -1
