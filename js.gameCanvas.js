@@ -551,6 +551,8 @@ document.addEventListener('keydown', ({key}) => {
 
     case 'h':
     keys.h.pressed = true
+    ammo += 1
+    statsOut()
     projectiles.push(
       new Projectile({
         position: {
