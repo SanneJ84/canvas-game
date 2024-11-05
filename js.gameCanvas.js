@@ -7,7 +7,7 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
 var scores = 0
-var lives = 5
+var lives = 10
 var killed = 0
 var ammo = 0
 
